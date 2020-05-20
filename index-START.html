@@ -56,8 +56,16 @@
     }
   }
 
+  // the below will take 'input', 'input', and 'textarea' options as the 'this' and fire when they are changed
+  function setOption() {
+    msg[this.name] = this.value;
+    toggle();
+  }
+
   speechSynthesis.addEventListener('voiceschanged', populateVoices); // "speechSynthesis" is an interface of the Web Speech API
   voicesDropdown.addEventListener('change', setVoice);
+  options.forEach(option => option.addEventListener('change', setOption)); // options are 'input', 'input', and 'textarea'
+
 
 </script>
 
