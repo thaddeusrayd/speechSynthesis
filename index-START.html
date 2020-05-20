@@ -39,12 +39,18 @@
 
   function populateVoices() {
     voices = this.getVoices(); // "getVoices" is a method for speechSynthesis -- the "this" here
-    const voiceOptions = voices
+    voicesDropdown.innerHTML = voices
       .map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
-      .join('');
+      .join('');  
+  }
+
+  function setVoice() {
+    msg.voice = voices.find(voice => voice.name === this.value);
   }
 
   speechSynthesis.addEventListener('voiceschanged', populateVoices); // "speechSynthesis" is an interface of the Web Speech API
+  voicesDropdown.addEventListener('change', setVoice);
+
 </script>
 
 </body>
