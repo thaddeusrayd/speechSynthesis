@@ -40,6 +40,7 @@
   function populateVoices() {
     voices = this.getVoices(); // "getVoices" is a method for speechSynthesis -- the "this" here
     voicesDropdown.innerHTML = voices
+      .filter(voice => voice.lang.includes('en'))
       .map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
       .join('');  
   }
@@ -65,7 +66,8 @@
   speechSynthesis.addEventListener('voiceschanged', populateVoices); // "speechSynthesis" is an interface of the Web Speech API
   voicesDropdown.addEventListener('change', setVoice);
   options.forEach(option => option.addEventListener('change', setOption)); // options are 'input', 'input', and 'textarea'
-
+  speakButton.addEventListener('click', toggle);
+  stopButton.addEventListener('click', toggle.bind(null, false)); // use bind to pass args to funcs in eventlisteners
 
 </script>
 
