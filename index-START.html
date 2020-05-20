@@ -37,6 +37,14 @@
   const stopButton = document.querySelector('#stop');
   msg.text = document.querySelector('[name="text"]').value;
 
+  function populateVoices() {
+    voices = this.getVoices(); // "getVoices" is a method for speechSynthesis -- the "this" here
+    const voiceOptions = voices
+      .map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
+      .join('');
+  }
+
+  speechSynthesis.addEventListener('voiceschanged', populateVoices); // "speechSynthesis" is an interface of the Web Speech API
 </script>
 
 </body>
